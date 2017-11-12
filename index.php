@@ -12,17 +12,18 @@
     <input type="submit" value="submit" id="btn">
     <!-- </form> -->
     <ul>
+     <li id="list"></li>
         <?php
         include('model/db-connect.php');
         include('model/query.php');
-            $query = mysqli_query(Query::connect(),"SELECT * FROM todo ORDER BY todo_list DESC");
+            $query = mysqli_query(Query::connect(),"SELECT *, (creation_date) as up_date FROM todo order by up_date desc");
         while($row = mysqli_fetch_array($query)){
             ?>
-            <li id="list"><?php print $row['todo_list'] ?></li>
+            <li id="list"><?php print $row['todo_list'] ."  ". $row['creation_date'] ?></li>
             <?php
         }
         ?>
-        
+       
     </ul>
   
 
