@@ -5,18 +5,14 @@ window.onload = () => {
         var arr = [];
         var httpRequest = new XMLHttpRequest();
 
-        httpRequest.open('POST', "./controller/todoApp.php", true);
+        httpRequest.open('GET', "./controller/todoApp.php?do=add", true);
         httpRequest.onreadystatechange = function() {
             if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
-                    var output = document.createElement('output');
-                    arr.push(todo);
-                    for (var i = 0; i < arr.length; i++) {
-                        console.log(arr[i]);
-                        document.querySelector("#list").appendChild(output);
+                    var output = document.createElement('li');
+                    output.innerHTML = todo;
+                    document.querySelector("#new-list").appendChild(output);
 
-                        output.innerHTML = "<li>" + arr.sort() + "</li>";
-                    }
                 } else {
                     alert('There was a problem with the request.');
                 }
@@ -24,6 +20,6 @@ window.onload = () => {
         };
         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         httpRequest.send("todo=" + todo);
-
     });
+
 }
